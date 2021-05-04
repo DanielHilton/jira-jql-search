@@ -1,0 +1,18 @@
+name: JIRA JQL Search
+description: Takes in a JQL expression and will output matching issues as JSON
+inputs:
+  jql:
+    description: The JQL query to search on JIRA with
+    required: true
+  fields:
+    description: A comma-separated list of fields to project from the issues (default returns entire issue data)
+    required: false
+outputs:
+  issueData:
+    description: JSON containing `issues`, an array of issues found (if any).
+runs:
+  using: 'node12'
+  main: 'action.js'
+branding:
+  color: blue
+  icon: search
