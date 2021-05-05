@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/DanielHilton/jira-jql-search#readme",
   "dependencies": {
+    "@actions/core": "^1.2.7",
     "jira-client": "^6.21.1"
   },
   "devDependencies": {
