@@ -12,7 +12,7 @@ outputs:
     description: JSON containing `issues`, an array of issues found (if any).
 runs:
   using: 'node12'
-  main: 'action.js'
+  main: 'dist/index.js'
 branding:
   color: blue
   icon: search
