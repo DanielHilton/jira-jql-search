@@ -2,9 +2,9 @@
   "name": "jira-jql-search",
   "version": "0.0.1",
   "description": "A GitHub Action for searching JIRA with a JQL query and returning the result",
-  "main": "action.js",
+  "main": "index.js",
   "scripts": {
-    "build": "standard --fix && ncc build action.js --minify && mv dist/index.js dist/action.min.js",
+    "build": "standard --fix && ncc build index.js --minify",
     "test": "jest tests"
   },
   "repository": {
@@ -36,5 +36,10 @@
     "semantic-release": "^17.4.2",
     "semantic-release-gitmoji": "^1.3.4",
     "standard": "^16.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "dist/**/*"
+    ]
   }
 }
