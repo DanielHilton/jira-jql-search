@@ -2,31 +2,30 @@ const core = require('@actions/core')
 const { setupJiraClient } = require('./helpers/jira')
 const jiraClient = setupJiraClient()
 
-async function run () {
-  try {
-    const apiResponse = await jiraClient.searchJira(core.getInput('jql'))
+const filterCustomIssueFields = (issues) => {
+  return issues.map(issue => {
+    issue.fields = Object.keys(issue.fields)
+      .filter(key => !key.startsWith('customfield'))
+      .reduce((obj, key) => {
+        obj[key] = issue.fields[key]
 
-    const fields = core.getInput('fields') ? core.getInput('fields').split(',') : [];
-    const filterFieldsOrDefault = key => fields && fields.length ? fields.includes(key) : !key.startsWith('customfield')
+        return obj
+      }, {})
 
-    const issues = apiResponse.issues.map(issue => {
-      issue.fields = Object.keys(issue.fields)
-        .filter(filterFieldsOrDefault)
-        .reduce((obj, key) => {
-          obj[key] = issue.fields[key]
-
-          return obj
-        }, {})
-
-      return issue
-    })
-
-    core.setOutput('issueData', JSON.stringify({ issues, quantity: issues.length }))
-  } catch (err) {
-    console.error(`An error occurred getting data from JIRA: ${err}`)
-  }
+    delete issue.expand
+    return issue
+  })
 }
 
-run().then(() => {
-  console.log('Completed search')
-})
+const fields = core.getInput('fields') ? core.getInput('fields').split(',') : []
+const jql = core.getInput('jql')
+
+jiraClient.searchJira(jql, fields.length ? { fields } : {})
+  .then(response => {
+    const issues = !fields.length ? filterCustomIssueFields(response.issues) : response.issues
+    core.setOutput('issueData', JSON.stringify({ issues, quantity: issues.length }))
+    console.log('Completed search')
+  })
+  .catch(err => {
+    core.setFailed(`An error occurred getting data from JIRA: ${err}`)
+  })
