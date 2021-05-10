@@ -2,6 +2,9 @@
 
 This action searches JIRA for the issues that match the JQL passed in, and returns the results in a JSON array.
 
+## Donation
+If you find this action useful, feel free to donate to my Dogecoin address, `D6XHeZcUJoCtJJ2HB9qCcok5yYLz4eB6Hs`
+
 ## Action Information
 
 ### Environment Variables 🔧
