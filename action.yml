@@ -11,7 +11,7 @@ outputs:
   issueData:
     description: JSON containing `issues`, an array of issues found (if any). Also returns `quantity`, the number of issues found.
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   color: blue
