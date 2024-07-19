@@ -46,7 +46,7 @@ module.exports = {
     }],
     ['@semantic-release/git', {
       assets: ['package.json', 'CHANGELOG.md', 'package-lock.json'],
-      message: ':bookmark: ${nextRelease.version}'
+      message: ':bookmark: ${nextRelease.version}' // eslint-disable-line no-template-curly-in-string
     }],
     '@semantic-release/github'
   ]
