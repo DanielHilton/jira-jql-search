@@ -1,6 +1,6 @@
 {
   "name": "jira-jql-search",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A GitHub Action for searching JIRA with a JQL query and returning the result",
   "main": "index.js",
   "scripts": {
