@@ -7,6 +7,9 @@ inputs:
   fields:
     description: A comma-separated list of fields to project from the issues (default returns entire issue data)
     required: false
+  maxResults:
+    description: The maximum number of issues to return (defaults to 50)
+    required: false
 outputs:
   issueData:
     description: JSON containing `issues`, an array of issues found (if any). Also returns `quantity`, the number of issues found.
