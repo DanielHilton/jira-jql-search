@@ -18,13 +18,18 @@ const filterCustomIssueFields = (issues) => {
 }
 
 const fieldsInput = core.getInput('fields')
-const maxResultsInput = parseInt(core.getInput('maxResults'), 10)
-const jqlInput = core.getInput('jql')
-
 const fields = fieldsInput ? fieldsInput.split(',') : []
-const maxResults = !isNaN(maxResultsInput) ? maxResultsInput : 50
 
-jiraClient.searchJira(jqlInput, { fields, maxResults }).then(response => {
+const maxResultsInput = parseInt(core.getInput('maxResults'), 10)
+const options = {
+  maxResults: !isNaN(maxResultsInput) ? maxResultsInput : 50
+}
+
+if (fields.length) {
+  options.fields = fields
+}
+
+jiraClient.searchJira(core.getInput('jql'), options).then(response => {
   const issues = !fields.length ? filterCustomIssueFields(response.issues) : response.issues
   core.setOutput('issueData', JSON.stringify({ issues, quantity: issues.length }))
   console.log('Completed search')
