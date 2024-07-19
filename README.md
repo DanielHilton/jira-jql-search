@@ -22,6 +22,7 @@ If you find this action useful, feel free to donate to my Ethereum address, `0xe
   * If not supplied, all **non 'customfield'** issue data is returned, for finding custom field information,
     first find the name of the field in the JIRA API and add it to the list
     e.g. `summary,description,customfield_10000`
+* `maxResults` - A number of maximum results to return from the search. If not sent, defaults to 50.
     
 ### Outputs 
 
